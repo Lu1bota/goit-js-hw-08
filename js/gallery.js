@@ -68,8 +68,6 @@ const list = document.querySelector(".gallery");
 
 const fragment = document.createDocumentFragment();
 
-const galleryContainer = document.querySelector("ul.gallery");
-
 images.forEach((element) => {
   const item = document.createElement("li");
   item.classList.add("gallery-item");
@@ -86,8 +84,10 @@ images.forEach((element) => {
 
   link.append(image);
   item.append(link);
-  list.append(item);
+  fragment.append(item);
 });
+
+list.append(fragment);
 
 list.addEventListener("click", handleImg);
 
@@ -95,10 +95,10 @@ function handleImg(event) {
   event.preventDefault();
   if (event.target.nodeName === "IMG") {
     console.log(event.target.dataset.source);
-  }
-  const instance = basicLightbox.create(`
+    const instance = basicLightbox.create(`
           <img src="${event.target.dataset.source}" width="1112" height="640"/>
       `);
 
-  instance.show();
+    instance.show();
+  }
 }
